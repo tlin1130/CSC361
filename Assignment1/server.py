@@ -1,6 +1,7 @@
 from socket import *
 import sys 
 import codecs
+
 serverSocket = socket(AF_INET, SOCK_STREAM)
 
 #prepare a server socket
@@ -18,10 +19,9 @@ while True:
         message = connectionSocket.recv(1024).decode()               
         filename = message.split()[1]                 
         f = codecs.open(filename[1:],'r')
-
         outputdata = f.read()
 
-        #Send one HTTP header line into socket
+        #Send one HTTP status line into socket
         statusline = 'HTTP/1.1 200 OK\r\n\r\n'
         connectionSocket.send(statusline.encode())
 
